@@ -219,6 +219,29 @@
             background-color: #4CAF50 !important;
             color: white !important;
         }
+
+        /* Stili per il link del logo nell'header */
+        .logo-container {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-container:hover {
+            text-decoration: none;
+        }
+
+        /* Stili per il link nel footer */
+        .developer-brand {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+        }
+
+        .developer-brand:hover {
+            text-decoration: none;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -228,10 +251,11 @@
     </div>
 
     <div class="container">
-        <!-- HEADER CON LOGO -->
+        <!-- HEADER CON LOGO - RIPRISTINATO IL LINK -->
         <header class="header">
             <div class="header-content">
-                <div class="logo-container">
+                <!-- MODIFICATO: Ripristinato il link -->
+                <a href="https://nogar8system.github.io/" class="logo-container">
                     <div class="logo-wrapper">
                         <div class="logo-main">
                             <img src="image/logo.png" alt="Trascrittore Audio/Video Logo" class="logo-image">
@@ -241,7 +265,7 @@
                             <span class="version">Versione 4.3.0</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
                 <nav class="nav">
                     <!-- MODIFICATO: Sostituito <a> con <button> e rimosso active -->
@@ -825,8 +849,8 @@
                         </div>
                     </div>
 
-                    <!-- Logo N8S con dimensioni corrette -->
-                    <div class="developer-brand">
+                    <!-- Logo N8S con dimensioni corrette - MODIFICATO: Aggiunto link -->
+                    <a href="https://nogar8system.github.io/" class="developer-brand">
                         <div class="developer-logo-wrapper">
                             <img src="image/N8S.png" alt="Nogar8System - Sistemi Informatici" 
                                  class="developer-logo" loading="lazy">
@@ -835,7 +859,7 @@
                                 <span class="developer-tag">Sviluppo Software</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 
                 <!-- Badge di conformità -->
