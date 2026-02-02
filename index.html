@@ -110,8 +110,10 @@
             transition: background-color 0.3s;
         }
 
+        /* Effetto hover per i pulsanti di navigazione */
         .nav-button:hover {
-            background-color: rgba(76, 175, 80, 0.1);
+            background-color: #4CAF50 !important;
+            color: white !important;
         }
 
         .nav-button.active {
@@ -174,7 +176,8 @@
         }
 
         .lang-current:hover {
-            background-color: rgba(76, 175, 80, 0.1);
+            background-color: #4CAF50 !important;
+            color: white !important;
         }
 
         .lang-dropdown {
@@ -213,7 +216,8 @@
         }
 
         .lang-dropdown span:hover {
-            background-color: rgba(76, 175, 80, 0.1);
+            background-color: #4CAF50 !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -240,8 +244,8 @@
                 </div>
 
                 <nav class="nav">
-                    <!-- MODIFICATO: Sostituito <a> con <button> -->
-                    <button class="nav-button active" onclick="scrollToSection('features')">Home</button>
+                    <!-- MODIFICATO: Sostituito <a> con <button> e rimosso active -->
+                    <button class="nav-button" onclick="scrollToSection('features')">Home</button>
                     <button class="nav-button" onclick="scrollToSection('features')">Funzionalità</button>
                     <button class="nav-button" onclick="scrollToSection('screenshots')">Anteprime</button>
                     <button class="nav-button" onclick="scrollToSection('download')">Scarica</button>
@@ -750,12 +754,14 @@
                         Semplice, potente ed efficiente.
                     </p>
                     <div class="footer-social">
-                        <span onclick="window.location.href='mailto:nogar8system@gmail.com'" style="cursor: pointer;" aria-label="Contatto email" title="Invia email">
+                        <!-- RIPRISTINATO: Link originali con effetto hover -->
+                        <a href="mailto:nogar8system@gmail.com" aria-label="Contatto email" title="Invia email">
                             <i class="fas fa-envelope"></i>
-                        </span>
-                        <span onclick="window.open('https://paypal.me/nogar8system', '_blank')" style="cursor: pointer;" aria-label="Donazioni PayPal" title="Supporta il progetto">
+                        </a>
+                        <a href="https://paypal.me/nogar8system" target="_blank" rel="noopener noreferrer" 
+                           aria-label="Donazioni PayPal" title="Supporta il progetto">
                             <i class="fab fa-paypal"></i>
-                        </span>
+                        </a>
                     </div>
                 </div>
 
