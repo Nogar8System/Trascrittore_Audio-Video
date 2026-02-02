@@ -96,6 +96,79 @@
         .popup-close:hover {
             background: #45a049;
         }
+
+        /* Stili per i pulsanti di navigazione modificati */
+        .nav-button {
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .nav-button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .lang-button {
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .hero-button {
+            background: none;
+            border: none;
+            font: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -108,7 +181,7 @@
         <!-- HEADER CON LOGO -->
         <header class="header">
             <div class="header-content">
-                <a href="https://nogar8system.github.io/" class="logo-container">
+                <div class="logo-container">
                     <div class="logo-wrapper">
                         <div class="logo-main">
                             <img src="image/logo.png" alt="Trascrittore Audio/Video Logo" class="logo-image">
@@ -118,28 +191,30 @@
                             <span class="version">Versione 4.3.0</span>
                         </div>
                     </div>
-                </a>
+                </div>
 
                 <nav class="nav">
-                    <a href="#features" class="active">Home</a>
-                    <a href="#features">Funzionalità</a>
-                    <a href="#screenshots">Anteprime</a>
-                    <a href="#download">Scarica</a>
-                    <a href="#manual">Info</a>
+                    <!-- MODIFICATO: Sostituito <a> con <button> -->
+                    <button class="nav-button active" onclick="scrollToSection('features')">Home</button>
+                    <button class="nav-button" onclick="scrollToSection('features')">Funzionalità</button>
+                    <button class="nav-button" onclick="scrollToSection('screenshots')">Anteprime</button>
+                    <button class="nav-button" onclick="scrollToSection('download')">Scarica</button>
+                    <button class="nav-button" onclick="scrollToSection('manual')">Info</button>
 
-                    <!-- Language Selector -->
+                    <!-- Language Selector MODIFICATO -->
                     <div class="lang-selector">
-                        <div class="lang-current">
+                        <button class="lang-button">
                             <span>Italiano</span>
                             <span>▼</span>
-                        </div>
+                        </button>
                         <div class="lang-dropdown">
-                            <a href="https://nogar8system.github.io/Trascrittore_Audio-Video/en/" data-lang="en">English</a>
-                            <a href="https://nogar8system.github.io/Trascrittore_Audio-Video/es/" data-lang="es">Español</a>
-                            <a href="https://nogar8system.github.io/Trascrittore_Audio-Video/de/" data-lang="de">Deutsch</a>
-                            <a href="https://nogar8system.github.io/Trascrittore_Audio-Video/fr/" data-lang="fr">Français</a>
+                            <button onclick="changeLanguage('en')">English</button>
+                            <button onclick="changeLanguage('es')">Español</button>
+                            <button onclick="changeLanguage('de')">Deutsch</button>
+                            <button onclick="changeLanguage('fr')">Français</button>
                         </div>
                     </div>
+                    
                     <!-- Theme Toggle -->
                     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -159,12 +234,13 @@
                 <h1>Trascrittore Audio/Video</h1>
                 <p>Converti automaticamente audio e video in testo con riconoscimento vocale avanzato usando AssemblyAI</p>
                 <div class="hero-buttons">
-                    <a href="#download" class="btn btn-primary">
+                    <!-- MODIFICATO: Sostituito <a> con <button> -->
+                    <button class="hero-button btn-primary" onclick="scrollToSection('download')">
                         <i class="fas fa-download"></i> Scarica Gratis (v4.3.0)
-                    </a>                
-                    <a href="#manual" class="btn btn-secondary">
+                    </button>                
+                    <button class="hero-button btn-secondary" onclick="scrollToSection('manual')">
                         <i class="fas fa-book"></i> Guida Completa
-                    </a>
+                    </button>
                 </div>
                 <div class="file-info">
                     <i class="fas fa-info-circle"></i>
@@ -547,24 +623,24 @@
                         </ul>
                     </div>
 
-					<div class="info-box">
-						<h3><i class="fas fa-user"></i> Informazioni sull'Autore</h3>
-						<div class="author-card">
-							<div class="author-info" style="width: 100%;">
-								<h4>Nogarotto Fabrizio</h4>
-								<p>Sviluppatore Software Specializzato</p>
-								<div class="author-contact">
-									<a href="mailto:nogar8system@gmail.com">
-										<i class="fas fa-envelope"></i> nogar8system@gmail.com
-									</a>
-									<a href="https://paypal.me/nogar8system" target="_blank">
-										<i class="fab fa-paypal"></i> Dona su PayPal
-									</a>
-								</div>
-							</div>
-						</div>
-						<p>Software sviluppato con passione per professionisti, ricercatori e studenti che necessitano di trascrizioni accurate.</p>
-					</div>
+                    <div class="info-box">
+                        <h3><i class="fas fa-user"></i> Informazioni sull'Autore</h3>
+                        <div class="author-card">
+                            <div class="author-info" style="width: 100%;">
+                                <h4>Nogarotto Fabrizio</h4>
+                                <p>Sviluppatore Software Specializzato</p>
+                                <div class="author-contact">
+                                    <span onclick="window.location.href='mailto:nogar8system@gmail.com'" style="cursor: pointer;">
+                                        <i class="fas fa-envelope"></i> nogar8system@gmail.com
+                                    </span>
+                                    <span onclick="window.open('https://paypal.me/nogar8system', '_blank')" style="cursor: pointer;">
+                                        <i class="fab fa-paypal"></i> Dona su PayPal
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Software sviluppato con passione per professionisti, ricercatori e studenti che necessitano di trascrizioni accurate.</p>
+                    </div>
 
                     <div class="info-box">
                         <h3><i class="fas fa-lightbulb"></i> Note Importanti</h3>
@@ -612,146 +688,140 @@
             </section>
         </div>
 
-		<!-- FOOTER CORRETTO E MIGLIORATO -->
-		<footer class="footer">
-			<div class="footer-content">
-				<div class="footer-brand">
-					<div class="footer-logo-container">
-						<img src="image/logo.png" alt="Trascrittore Audio/Video" class="footer-logo" loading="lazy">
-						<div class="footer-brand-text">
-							<h3>Trascrittore<br>Audio/Video</h3>
-							<span class="footer-version">v4.3.0</span>
-						</div>
-					</div>
-					<p class="footer-description">
-						Software professionale per trascrizione automatica di audio e video.
-						Semplice, potente ed efficiente.
-					</p>
-					<div class="footer-social">
-						<a href="mailto:nogar8system@gmail.com" aria-label="Contatto email" title="Invia email">
-							<i class="fas fa-envelope"></i>
-						</a>
-						<a href="https://paypal.me/nogar8system" target="_blank" rel="noopener noreferrer" 
-						   aria-label="Donazioni PayPal" title="Supporta il progetto">
-							<i class="fab fa-paypal"></i>
-						</a>
-					</div>
-				</div>
+        <!-- FOOTER CORRETTO E MIGLIORATO -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo-container">
+                        <img src="image/logo.png" alt="Trascrittore Audio/Video" class="footer-logo" loading="lazy">
+                        <div class="footer-brand-text">
+                            <h3>Trascrittore<br>Audio/Video</h3>
+                            <span class="footer-version">v4.3.0</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Software professionale per trascrizione automatica di audio e video.
+                        Semplice, potente ed efficiente.
+                    </p>
+                    <div class="footer-social">
+                        <span onclick="window.location.href='mailto:nogar8system@gmail.com'" style="cursor: pointer;" aria-label="Contatto email" title="Invia email">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span onclick="window.open('https://paypal.me/nogar8system', '_blank')" style="cursor: pointer;" aria-label="Donazioni PayPal" title="Supporta il progetto">
+                            <i class="fab fa-paypal"></i>
+                        </span>
+                    </div>
+                </div>
 
-				<div class="footer-links-grid">
-					<div class="footer-section">
-						<h4>Navigazione</h4>
-						<ul>
-							<li><a href="#features" aria-label="Vai alla sezione Funzionalità">Funzionalità</a></li>
-							<li><a href="#screenshots" aria-label="Vai alla sezione Anteprime">Anteprime</a></li>
-							<li><a href="#download" aria-label="Vai alla sezione Download">Download</a></li>
-							<li><a href="#manual" aria-label="Vai alla sezione Informazioni">Informazioni</a></li>
-						</ul>
-					</div>
+                <div class="footer-links-grid">
+                    <div class="footer-section">
+                        <h4>Navigazione</h4>
+                        <ul>
+                            <li><span onclick="scrollToSection('features')" style="cursor: pointer;">Funzionalità</span></li>
+                            <li><span onclick="scrollToSection('screenshots')" style="cursor: pointer;">Anteprime</span></li>
+                            <li><span onclick="scrollToSection('download')" style="cursor: pointer;">Download</span></li>
+                            <li><span onclick="scrollToSection('manual')" style="cursor: pointer;">Informazioni</span></li>
+                        </ul>
+                    </div>
 
-					<div class="footer-section">
-						<h4>Supporto</h4>
-						<ul>
-							<li><a href="mailto:nogar8system@gmail.com" aria-label="Contatta supporto">Assistenza</a></li>
-							<li><a href="https://paypal.me/nogar8system" target="_blank" rel="noopener noreferrer" 
-								   aria-label="Donazioni tramite PayPal">Donazioni</a></li>
-							<li><a href="privacy.html" aria-label="Privacy Policy">Privacy Policy</a></li>
-							<li><a href="terms.html" aria-label="Termini d'uso">Termini d'uso</a></li>
-						</ul>
-					</div>
+                    <div class="footer-section">
+                        <h4>Supporto</h4>
+                        <ul>
+                            <li><span onclick="window.location.href='mailto:nogar8system@gmail.com'" style="cursor: pointer;">Assistenza</span></li>
+                            <li><span onclick="window.open('https://paypal.me/nogar8system', '_blank')" style="cursor: pointer;">Donazioni</span></li>
+                            <li><span onclick="window.location.href='privacy.html'" style="cursor: pointer;">Privacy Policy</span></li>
+                            <li><span onclick="window.location.href='terms.html'" style="cursor: pointer;">Termini d'uso</span></li>
+                        </ul>
+                    </div>
 
-					<div class="footer-section">
-						<h4>Tecnologie</h4>
-						<ul>
-							<li><a href="https://www.assemblyai.com" target="_blank" rel="noopener noreferrer" 
-								   aria-label="Sito AssemblyAI">AssemblyAI API</a></li>
-							<li><a href="https://ffmpeg.org" target="_blank" rel="noopener noreferrer" 
-								   aria-label="Sito FFmpeg">FFmpeg Toolkit</a></li>
-							<li><a href="https://www.python.org" target="_blank" rel="noopener noreferrer" 
-								   aria-label="Sito Python">Python 3</a></li>
-							<li><a href="https://gtts.readthedocs.io" target="_blank" rel="noopener noreferrer" 
-								   aria-label="Documentazione gTTS">gTTS</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+                    <div class="footer-section">
+                        <h4>Tecnologie</h4>
+                        <ul>
+                            <li><span onclick="window.open('https://www.assemblyai.com', '_blank')" style="cursor: pointer;">AssemblyAI API</span></li>
+                            <li><span onclick="window.open('https://ffmpeg.org', '_blank')" style="cursor: pointer;">FFmpeg Toolkit</span></li>
+                            <li><span onclick="window.open('https://www.python.org', '_blank')" style="cursor: pointer;">Python 3</span></li>
+                            <li><span onclick="window.open('https://gtts.readthedocs.io', '_blank')" style="cursor: pointer;">gTTS</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-			<!-- FOOTER BOTTOM MIGLIORATO -->
-			<div class="footer-bottom">
-				<div class="footer-bottom-container">
-					<!-- Logo Software -->
-					<div class="software-brand">
-						<div class="software-logo-wrapper">
-							<img src="image/logo.png" alt="Trascrittore Audio/Video" class="software-logo" loading="lazy">
-							<div class="software-info">
-								<span class="software-name">Trascrittore Audio/Video</span>
-								<span class="software-version">v4.3.0</span>
-							</div>
-						</div>
-					</div>
+            <!-- FOOTER BOTTOM MIGLIORATO -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-container">
+                    <!-- Logo Software -->
+                    <div class="software-brand">
+                        <div class="software-logo-wrapper">
+                            <img src="image/logo.png" alt="Trascrittore Audio/Video" class="software-logo" loading="lazy">
+                            <div class="software-info">
+                                <span class="software-name">Trascrittore Audio/Video</span>
+                                <span class="software-version">v4.3.0</span>
+                            </div>
+                        </div>
+                    </div>
 
-					<!-- Copyright Centrale -->
-					<div class="copyright-center">
-						<p class="copyright-main">
-							<span aria-hidden="true">&copy;</span> 
-							<span id="current-year">2026</span> 
-							Nogar8System - Tutti i diritti riservati
-						</p>
-						<div class="copyright-notes">
-							<p>Software gratuito per uso personale e professionale</p>
-							<p>Non affiliato con AssemblyAI, FFmpeg o altri marchi menzionati</p>
-						</div>
-					</div>
+                    <!-- Copyright Centrale -->
+                    <div class="copyright-center">
+                        <p class="copyright-main">
+                            <span aria-hidden="true">&copy;</span> 
+                            <span id="current-year">2026</span> 
+                            Nogar8System - Tutti i diritti riservati
+                        </p>
+                        <div class="copyright-notes">
+                            <p>Software gratuito per uso personale e professionale</p>
+                            <p>Non affiliato con AssemblyAI, FFmpeg o altri marchi menzionati</p>
+                        </div>
+                    </div>
 
-					<!-- Logo N8S con dimensioni corrette -->
-					<div class="developer-brand">
-						<div class="developer-logo-wrapper">
-							<img src="image/N8S.png" alt="Nogar8System - Sistemi Informatici" 
-								 class="developer-logo" loading="lazy">
-							<div class="developer-info">
-								<span class="developer-name">Nogar8System</span>
-								<span class="developer-tag">Sviluppo Software</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Badge di conformità -->
-				<div class="compliance-badges">
-					<span aria-label="Software conforme al GDPR">GDPR Compliant</span>
-					<span aria-label="Certificato sicurezza dati">Dati Crittografati</span>
-					<span aria-label="Accessibile secondo standard WCAG">WCAG 2.1 AA</span>
-				</div>
-			</div>
-		</footer>
+                    <!-- Logo N8S con dimensioni corrette -->
+                    <div class="developer-brand">
+                        <div class="developer-logo-wrapper">
+                            <img src="image/N8S.png" alt="Nogar8System - Sistemi Informatici" 
+                                 class="developer-logo" loading="lazy">
+                            <div class="developer-info">
+                                <span class="developer-name">Nogar8System</span>
+                                <span class="developer-tag">Sviluppo Software</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Badge di conformità -->
+                <div class="compliance-badges">
+                    <span aria-label="Software conforme al GDPR">GDPR Compliant</span>
+                    <span aria-label="Certificato sicurezza dati">Dati Crittografati</span>
+                    <span aria-label="Accessibile secondo standard WCAG">WCAG 2.1 AA</span>
+                </div>
+            </div>
+        </footer>
 
-		<!-- POPUP DI DOWNLOAD (inizialmente nascosto) -->
-		<div id="downloadPopup" class="download-popup">
-			<div class="popup-content">
-				<div class="popup-header">
-					<i class="fas fa-download"></i>
-					<h3>Download in corso...</h3>
-				</div>
-				<div class="popup-body">
-					<p><strong>Trascrittore Audio/Video v4.3.0</strong></p>
-					<p>Il download è stato avviato.</p>
-					<p class="small">Se non vedi il download, controlla la cartella Downloads del tuo browser.</p>
-				</div>
-				<div class="popup-footer">
-					<button class="popup-close" onclick="closeDownloadPopup()">Chiudi</button>
-				</div>
-			</div>
-		</div>
+        <!-- POPUP DI DOWNLOAD (inizialmente nascosto) -->
+        <div id="downloadPopup" class="download-popup">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <i class="fas fa-download"></i>
+                    <h3>Download in corso...</h3>
+                </div>
+                <div class="popup-body">
+                    <p><strong>Trascrittore Audio/Video v4.3.0</strong></p>
+                    <p>Il download è stato avviato.</p>
+                    <p class="small">Se non vedi il download, controlla la cartella Downloads del tuo browser.</p>
+                </div>
+                <div class="popup-footer">
+                    <button class="popup-close" onclick="closeDownloadPopup()">Chiudi</button>
+                </div>
+            </div>
+        </div>
 
-		<script>
-			// Imposta dinamicamente l'anno corrente nel footer
-			document.addEventListener('DOMContentLoaded', () => {
-				const currentYearElement = document.getElementById('current-year');
-				if (currentYearElement) {
-					currentYearElement.textContent = new Date().getFullYear();
-				}
-			});
-		</script>
+        <script>
+            // Imposta dinamicamente l'anno corrente nel footer
+            document.addEventListener('DOMContentLoaded', () => {
+                const currentYearElement = document.getElementById('current-year');
+                if (currentYearElement) {
+                    currentYearElement.textContent = new Date().getFullYear();
+                }
+            });
+        </script>
     </div>
 
     <!-- SCROLL TO TOP BUTTON -->
@@ -760,6 +830,24 @@
     </button>
 
     <script>
+        // ============================================
+        // FUNZIONE DI SCORRIMENTO PER LE SEZIONI
+        // ============================================
+        function scrollToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                const header = document.querySelector('.header');
+                const headerOffset = header ? header.offsetHeight + 20 : 100;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
         // ============================================
         // FUNZIONE DI DOWNLOAD CORRETTA - UN SOLO DOWNLOAD
         // ============================================
@@ -877,44 +965,6 @@
             }
         });
 
-        // Smooth scroll per i link di navigazione
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                
-                // Gestione speciale per #download-button
-                if (targetId === '#download-button') {
-                    const downloadButton = document.querySelector('#download-button');
-                    if (downloadButton) {
-                        const header = document.querySelector('.header');
-                        const headerOffset = header ? header.offsetHeight + 40 : 100;
-                        const elementPosition = downloadButton.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                        return;
-                    }
-                }
-                
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const header = document.querySelector('.header');
-                    const headerOffset = header ? header.offsetHeight + 20 : 100;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
@@ -934,7 +984,7 @@
         });
 
         // Language Selector
-        const langCurrent = document.querySelector('.lang-current');
+        const langCurrent = document.querySelector('.lang-button');
         const langDropdown = document.querySelector('.lang-dropdown');
 
         langCurrent.addEventListener('click', (e) => {
@@ -953,6 +1003,14 @@
                 langDropdown.classList.remove('active');
             }
         });
+
+        // Funzione per cambiare lingua (esempio)
+        function changeLanguage(lang) {
+            // Qui puoi implementare il cambio di lingua
+            console.log('Cambio lingua a:', lang);
+            // Per ora, ricarica la pagina con la lingua selezionata
+            window.location.href = `https://nogar8system.github.io/Trascrittore_Audio-Video/${lang}/`;
+        }
 
         // Effetto hover per le feature cards
         document.querySelectorAll('.feature-card').forEach(card => {
