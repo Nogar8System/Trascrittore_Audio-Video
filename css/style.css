@@ -81,7 +81,7 @@ body {
     opacity: 0.03;
     width: 600px;
     height: 600px;
-    background-image: url('image/logo.jpg');
+    background-image: url('image/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -1203,59 +1203,116 @@ section {
 }
 
 /* ========================================
-   FOOTER
+   FOOTER CON LOGHI PROPORZIONATI
    ======================================== */
 .footer {
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     color: white;
-    padding: 80px 0 40px;
+    padding: 50px 0 0;
     margin-top: 80px;
     position: relative;
 }
 
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+}
+
+/* Contenuto principale del footer */
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 48px;
-}
-
-.footer-logo-section {
+    padding: 0 20px 40px;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    gap: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-logo {
+/* Brand Section - Logo PROPORZIONATO */
+.footer-brand {
+    flex: 1;
+    max-width: 300px;
+}
+
+.footer-logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    font-family: 'Inter', sans-serif;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
-.footer-logo img {
-    width: 40px;
-    height: 40px;
+/* LOGO PRINCIPALE PROPORZIONATO */
+.footer-logo {
+    width: 50px;
+    height: 50px;
     object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-logo-section p {
+.footer-logo:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-brand-text h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.footer-version {
+    font-size: 0.85rem;
+    color: var(--accent-blue-light);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.footer-description {
     color: rgba(255, 255, 255, 0.7);
-    line-height: 1.7;
-    font-size: 0.95rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    margin-top: 10px;
 }
 
-.footer-section h3 {
-    font-size: 1.125rem;
-    margin-bottom: 20px;
+/* Links Grid */
+.footer-links-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
     color: white;
     font-weight: 600;
-    font-family: 'Inter', sans-serif;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--accent-blue);
 }
 
 .footer-section ul {
@@ -1263,130 +1320,163 @@ section {
 }
 
 .footer-section ul li {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
-.footer-section ul li a {
-    color: rgba(255, 255, 255, 0.8);
+.footer-section ul li a,
+.footer-section ul li {
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95rem;
-}
-
-.footer-section ul li a:hover {
-    color: white;
-    transform: translateX(4px);
-}
-
-.footer-section ul li i {
-    color: var(--accent-blue-light);
-    font-size: 1rem;
-}
-
-/* ========================================
-   FOOTER BOTTOM - LAYOUT A 3 COLONNE
-   ======================================== */
-.footer-bottom {
-    padding: 20px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 20px;
-    width: 100%;
-}
-
-.footer-bottom-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    gap: 20px;
-}
-
-.footer-bottom-left,
-.footer-bottom-right {
-    flex: 1;
-    min-width: 120px;
-    display: flex;
-    align-items: center;
-}
-
-.footer-bottom-center {
-    flex: 2;
-    text-align: center;
-    min-width: 300px;
-}
-
-/* Logo N8S con effetti hero */
-.footer-n8s-logo {
-    height: 60px;
-    width: auto;
-    filter: var(--logo-filter);
-    opacity: 0.9;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.footer-n8s-logo:hover {
-    opacity: 1;
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.copyright-text {
-    margin: 0;
-    color: rgba(255, 255, 255, 0.85);
     font-size: 0.9rem;
     line-height: 1.4;
 }
 
-.footer-disclaimer {
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin: 6px 0 0 0;
-    line-height: 1.5;
+.footer-section ul li a:hover {
+    color: white;
+    padding-left: 5px;
 }
 
 /* ========================================
-   SCROLL TO TOP BUTTON
+   FOOTER BOTTOM - LOGHI PROPORZIONATI
    ======================================== */
-.scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: var(--gradient-primary);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    backdrop-filter: blur(10px);
+}
+
+.footer-bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Logo Software (SINISTRA) */
+.software-brand {
+    flex: 1;
+    min-width: 160px;
+}
+
+.software-logo-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateY(20px);
-    z-index: 999;
+    gap: 10px;
 }
 
-.scroll-to-top:hover {
-    transform: translateY(0) scale(1.1);
-    box-shadow: var(--shadow-lg);
+.software-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.software-logo:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.software-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.software-name {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.software-version {
+    font-size: 0.75rem;
+    color: var(--accent-blue-light);
+}
+
+/* Copyright Centrale */
+.copyright-center {
+    flex: 2;
+    text-align: center;
+    min-width: 250px;
+}
+
+.copyright-main {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.copyright-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.copyright-notes p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.3;
+}
+
+/* Logo Developer (DESTRA) - PROPORZIONATO */
+.developer-brand {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.developer-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.developer-logo-wrapper:hover {
+    opacity: 1;
+}
+
+.developer-logo {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.developer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.developer-name {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.developer-tag {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
 }
 
 /* ========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN PROPORZIONATO
    ======================================== */
 @media (max-width: 992px) {
     .hero h1 {
@@ -1398,14 +1488,46 @@ section {
     }
     
     .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
+        flex-direction: column;
         gap: 40px;
+        padding-bottom: 30px;
     }
     
-    .footer-logo-section {
-        align-items: center;
+    .footer-brand {
+        max-width: 100%;
         text-align: center;
+    }
+    
+    .footer-logo-container {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .footer-logo {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .footer-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .footer-bottom-container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .software-logo-wrapper,
+    .developer-logo-wrapper {
+        justify-content: center;
+    }
+    
+    .developer-brand {
+        justify-content: center;
     }
     
     .author-card {
@@ -1459,27 +1581,41 @@ section {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .footer-bottom-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
+    .footer {
+        padding: 40px 0 0;
     }
     
-    .footer-bottom-left,
-    .footer-bottom-right {
-        flex: none;
-        width: 100%;
-        justify-content: center;
+    .footer-links-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
     }
     
-    .footer-bottom-center {
-        flex: none;
-        width: 100%;
-    }
-    
-    .footer-n8s-logo {
-        height: 45px;
+    .footer-logo {
+        width: 40px;
+        height: 40px;
         padding: 6px;
+    }
+    
+    .footer-brand-text h3 {
+        font-size: 1.2rem;
+    }
+    
+    .software-logo {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .developer-logo {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .copyright-main {
+        font-size: 0.85rem;
+    }
+    
+    .copyright-notes p {
+        font-size: 0.7rem;
     }
 }
 
@@ -1526,6 +1662,50 @@ section {
     .feature-card,
     .info-box {
         padding: 24px;
+    }
+    
+    .footer-content {
+        padding: 0 15px 25px;
+    }
+    
+    .footer-bottom-container {
+        padding: 0 15px;
+    }
+    
+    .footer-logo {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .software-logo-wrapper,
+    .developer-logo-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .software-logo {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .developer-logo {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .software-name,
+    .developer-name {
+        font-size: 0.75rem;
+    }
+    
+    .software-version,
+    .developer-tag {
+        font-size: 0.65rem;
+    }
+    
+    .copyright-center {
+        min-width: 200px;
     }
 }
 
@@ -1576,4 +1756,39 @@ section {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-blue-hover);
+}
+
+/* ========================================
+   EFFETTI SOTTILI PER LOGHI FOOTER
+   ======================================== */
+@keyframes subtle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.footer-logo {
+    animation: subtle-pulse 4s ease-in-out infinite;
+}
+
+.footer-logo:hover {
+    animation: none;
+}
+
+/* Ombre leggere per profondità */
+.footer-logo {
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.software-logo {
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.developer-logo {
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
