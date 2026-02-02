@@ -1203,56 +1203,165 @@ section {
 }
 
 /* ========================================
-   FOOTER – LOGHI OTTIMIZZATI
+   FOOTER CON LOGHI PROPORZIONATI
    ======================================== */
+.footer {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    padding: 50px 0 0;
+    margin-top: 80px;
+    position: relative;
+}
 
-/* Contenitore logo + testo */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+}
+
+/* Contenuto principale del footer */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    display: flex;
+    gap: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand Section - Logo PROPORZIONATO */
+.footer-brand {
+    flex: 1;
+    max-width: 300px;
+}
+
 .footer-logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
-/* LOGO PRINCIPALE FOOTER */
+/* LOGO PRINCIPALE PROPORZIONATO */
 .footer-logo {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
-    padding: 6px;
-    border-radius: 8px;
-
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-
-    box-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-
-    transition: transform 0.25s ease, background 0.25s ease;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Hover discreto */
 .footer-logo:hover {
-    transform: scale(1.04);
-    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
 }
 
-/* Testo brand footer */
 .footer-brand-text h3 {
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    line-height: 1.2;
-    margin: 0;
+    color: white;
+    margin-bottom: 5px;
+    line-height: 1.3;
 }
 
 .footer-version {
     font-size: 0.85rem;
-    opacity: 0.8;
+    color: var(--accent-blue-light);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Links Grid */
+.footer-links-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-section h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--accent-blue);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a,
+.footer-section ul li {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+    padding-left: 5px;
 }
 
 /* ========================================
-   FOOTER BOTTOM – LOGO SOFTWARE
+   FOOTER BOTTOM CON LOGO NOGAR8SYSTEM VISIBILE
    ======================================== */
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Logo Software (SINISTRA) - Ridotto */
+.software-brand {
+    flex: 1;
+    min-width: 150px;
+}
 
 .software-logo-wrapper {
     display: flex;
@@ -1261,32 +1370,357 @@ section {
 }
 
 .software-logo {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
-    padding: 4px;
+    opacity: 0.8;
+    transition: var(--transition);
     border-radius: 6px;
-
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px;
+}
+
+.software-logo:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.software-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .software-name {
-    font-size: 0.95rem;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .software-version {
-    font-size: 0.8rem;
-    opacity: 0.7;
+    font-size: 0.7rem;
+    color: var(--accent-blue-light);
+}
+
+/* Copyright Centrale */
+.copyright-center {
+    flex: 2;
+    text-align: center;
+    min-width: 280px;
+}
+
+.copyright-main {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.copyright-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.copyright-notes p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.3;
+}
+
+/* Logo Nogar8System (DESTRA) - BEN VISIBILE */
+.n8s-brand {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.n8s-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.n8s-logo-container:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* LOGO NOGAR8SYSTEM - Dimensioni ottimali per visibilità */
+.n8s-logo {
+    width: 20px;  /* DIMENSIONE PERFETTA per essere visibile */
+    height: 20px; /* DIMENSIONE PERFETTA per essere visibile */
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+    transition: var(--transition);
+}
+
+.n8s-logo:hover {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.n8s-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+}
+
+.n8s-name {
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.n8s-tag {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 /* ========================================
-   DARK MODE FIX (coerenza visiva)
+   RESPONSIVE DESIGN OTTIMIZZATO
    ======================================== */
+@media (max-width: 992px) {
+    .footer-bottom-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .software-logo-wrapper {
+        justify-content: center;
+    }
+    
+    .n8s-brand {
+        justify-content: center;
+    }
+    
+    .n8s-logo-container {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px 10px;
+    }
+    
+    .copyright-center {
+        min-width: 250px;
+    }
+}
 
-body.dark-mode .footer-logo,
-body.dark-mode .software-logo {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
+@media (max-width: 768px) {
+    .footer-bottom {
+        padding: 15px 0;
+    }
+    
+    .footer-bottom-container {
+        gap: 15px;
+    }
+    
+    .software-logo {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .software-name {
+        font-size: 0.75rem;
+    }
+    
+    .software-version {
+        font-size: 0.65rem;
+    }
+    
+    .copyright-main {
+        font-size: 0.85rem;
+    }
+    
+    .copyright-notes p {
+        font-size: 0.72rem;
+    }
+    
+    /* Logo Nogar8System per mobile */
+    .n8s-logo {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .n8s-name {
+        font-size: 0.85rem;
+    }
+    
+    .n8s-tag {
+        font-size: 0.7rem;
+    }
+    
+    .n8s-logo-container {
+        padding: 6px 10px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-bottom-container {
+        padding: 0 15px;
+        gap: 12px;
+    }
+    
+    .software-logo-wrapper {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .software-logo {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .copyright-center {
+        min-width: 220px;
+    }
+    
+    .copyright-main {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    .copyright-notes p {
+        font-size: 0.68rem;
+    }
+    
+    /* Logo Nogar8System per mobile piccolo */
+    .n8s-logo-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .n8s-logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .n8s-text {
+        text-align: center;
+    }
+    
+    .n8s-name {
+        font-size: 0.8rem;
+    }
+    
+    .n8s-tag {
+        font-size: 0.65rem;
+    }
+}
+
+/* ========================================
+   EFFETTI SPECIALI LOGO NOGAR8SYSTEM
+   ======================================== */
+@keyframes n8s-glow {
+    0%, 100% { 
+        filter: brightness(0) invert(1) drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+    }
+    50% { 
+        filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+    }
+}
+
+.n8s-logo {
+    animation: n8s-glow 3s ease-in-out infinite;
+}
+
+.n8s-logo:hover {
+    animation: none;
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+/* Ombra per profondità */
+.n8s-logo {
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.feature-card,
+.screenshot-card,
+.info-card,
+.download-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.feature-card:nth-child(2) { animation-delay: 0.1s; }
+.feature-card:nth-child(3) { animation-delay: 0.2s; }
+.feature-card:nth-child(4) { animation-delay: 0.3s; }
+.feature-card:nth-child(5) { animation-delay: 0.4s; }
+.feature-card:nth-child(6) { animation-delay: 0.5s; }
+.feature-card:nth-child(7) { animation-delay: 0.6s; }
+.feature-card:nth-child(8) { animation-delay: 0.7s; }
+
+/* ========================================
+   SCROLLBAR PERSONALIZZATA
+   ======================================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue-hover);
+}
+
+/* ========================================
+   EFFETTI SOTTILI PER LOGHI FOOTER
+   ======================================== */
+@keyframes subtle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.footer-logo {
+    animation: subtle-pulse 4s ease-in-out infinite;
+}
+
+.footer-logo:hover {
+    animation: none;
+}
+
+/* Ombre leggere per profondità */
+.footer-logo {
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.software-logo {
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.developer-logo {
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
