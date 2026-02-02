@@ -119,19 +119,6 @@
             color: white;
         }
 
-        .lang-button {
-            background: none;
-            border: none;
-            color: inherit;
-            font: inherit;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-
         .hero-button {
             background: none;
             border: none;
@@ -169,6 +156,65 @@
             background: rgba(76, 175, 80, 0.1);
             transform: translateY(-2px);
         }
+
+        /* Stili per il selettore lingua - RIPRISTINATI alla versione originale */
+        .lang-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .lang-current:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            min-width: 150px;
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .dark-mode .lang-dropdown {
+            background: #2d2d2d;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .lang-dropdown.active {
+            display: block;
+        }
+
+        .lang-dropdown span {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .lang-dropdown span {
+            color: white;
+        }
+
+        .lang-dropdown span:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -201,17 +247,17 @@
                     <button class="nav-button" onclick="scrollToSection('download')">Scarica</button>
                     <button class="nav-button" onclick="scrollToSection('manual')">Info</button>
 
-                    <!-- Language Selector MODIFICATO -->
+                    <!-- Language Selector RIPRISTINATO con grafica originale -->
                     <div class="lang-selector">
-                        <button class="lang-button">
+                        <div class="lang-current" onclick="toggleLanguageDropdown()">
                             <span>Italiano</span>
                             <span>▼</span>
-                        </button>
-                        <div class="lang-dropdown">
-                            <button onclick="changeLanguage('en')">English</button>
-                            <button onclick="changeLanguage('es')">Español</button>
-                            <button onclick="changeLanguage('de')">Deutsch</button>
-                            <button onclick="changeLanguage('fr')">Français</button>
+                        </div>
+                        <div class="lang-dropdown" id="languageDropdown">
+                            <span onclick="changeLanguage('en')">English</span>
+                            <span onclick="changeLanguage('es')">Español</span>
+                            <span onclick="changeLanguage('de')">Deutsch</span>
+                            <span onclick="changeLanguage('fr')">Français</span>
                         </div>
                     </div>
                     
@@ -849,6 +895,42 @@
         }
 
         // ============================================
+        // FUNZIONI PER IL SELEttORE LINGUA
+        // ============================================
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            // Chiudi il dropdown
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.remove('active');
+            
+            // Cambia la lingua (reindirizza alla pagina corrispondente)
+            const langUrls = {
+                'en': 'https://nogar8system.github.io/Trascrittore_Audio-Video/en/',
+                'es': 'https://nogar8system.github.io/Trascrittore_Audio-Video/es/',
+                'de': 'https://nogar8system.github.io/Trascrittore_Audio-Video/de/',
+                'fr': 'https://nogar8system.github.io/Trascrittore_Audio-Video/fr/'
+            };
+            
+            if (langUrls[lang]) {
+                window.location.href = langUrls[lang];
+            }
+        }
+
+        // Chiudi il dropdown quando si clicca fuori
+        document.addEventListener('click', function(event) {
+            const langSelector = document.querySelector('.lang-selector');
+            const dropdown = document.getElementById('languageDropdown');
+            
+            if (!langSelector.contains(event.target) && dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // ============================================
         // FUNZIONE DI DOWNLOAD CORRETTA - UN SOLO DOWNLOAD
         // ============================================
         
@@ -982,35 +1064,6 @@
             const isDarkMode = body.classList.contains('dark-mode');
             localStorage.setItem('transcriber-theme', isDarkMode ? 'dark' : 'light');
         });
-
-        // Language Selector
-        const langCurrent = document.querySelector('.lang-button');
-        const langDropdown = document.querySelector('.lang-dropdown');
-
-        langCurrent.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langDropdown.classList.toggle('active');
-        });
-
-        document.addEventListener('click', () => {
-            langDropdown.classList.remove('active');
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const langSelector = document.querySelector('.lang-selector');
-            if (!langSelector.contains(event.target)) {
-                langDropdown.classList.remove('active');
-            }
-        });
-
-        // Funzione per cambiare lingua (esempio)
-        function changeLanguage(lang) {
-            // Qui puoi implementare il cambio di lingua
-            console.log('Cambio lingua a:', lang);
-            // Per ora, ricarica la pagina con la lingua selezionata
-            window.location.href = `https://nogar8system.github.io/Trascrittore_Audio-Video/${lang}/`;
-        }
 
         // Effetto hover per le feature cards
         document.querySelectorAll('.feature-card').forEach(card => {
