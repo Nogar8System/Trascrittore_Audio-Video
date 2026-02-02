@@ -1338,12 +1338,13 @@ section {
 }
 
 /* ========================================
-   FOOTER BOTTOM - LOGHI PROPORZIONATI
+   FOOTER BOTTOM CON LOGO NOGAR8SYSTEM VISIBILE
    ======================================== */
 .footer-bottom {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
     padding: 20px 0;
     backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-bottom-container {
@@ -1353,13 +1354,13 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
 }
 
-/* Logo Software (SINISTRA) */
+/* Logo Software (SINISTRA) - Ridotto */
 .software-brand {
     flex: 1;
-    min-width: 160px;
+    min-width: 150px;
 }
 
 .software-logo-wrapper {
@@ -1369,12 +1370,14 @@ section {
 }
 
 .software-logo {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
     opacity: 0.8;
     transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
 }
 
 .software-logo:hover {
@@ -1385,17 +1388,18 @@ section {
 .software-info {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 2px;
 }
 
 .software-name {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .software-version {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--accent-blue-light);
 }
 
@@ -1403,211 +1407,140 @@ section {
 .copyright-center {
     flex: 2;
     text-align: center;
-    min-width: 250px;
+    min-width: 280px;
 }
 
 .copyright-main {
     margin: 0;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    margin-bottom: 4px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .copyright-notes {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
 }
 
 .copyright-notes p {
     margin: 0;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
     line-height: 1.3;
 }
 
-/* Logo Developer (DESTRA) - PROPORZIONATO */
-.developer-brand {
+/* Logo Nogar8System (DESTRA) - BEN VISIBILE */
+.n8s-brand {
     flex: 1;
-    min-width: 140px;
+    min-width: 160px;
     display: flex;
     justify-content: flex-end;
 }
 
-.developer-logo-wrapper {
+.n8s-logo-container {
     display: flex;
     align-items: center;
-    gap: 8px;
-    opacity: 0.8;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.n8s-logo-container:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* LOGO NOGAR8SYSTEM - Dimensioni ottimali per visibilità */
+.n8s-logo {
+    width: 40px;  /* DIMENSIONE PERFETTA per essere visibile */
+    height: 40px; /* DIMENSIONE PERFETTA per essere visibile */
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
     transition: var(--transition);
 }
 
-.developer-logo-wrapper:hover {
+.n8s-logo:hover {
     opacity: 1;
+    transform: scale(1.08);
 }
 
-.developer-logo {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.developer-info {
+.n8s-text {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 3px;
+    text-align: left;
 }
 
-.developer-name {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.9);
+.n8s-name {
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.n8s-tag {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     white-space: nowrap;
 }
 
-.developer-tag {
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.6);
-    white-space: nowrap;
-}
-
 /* ========================================
-   RESPONSIVE DESIGN PROPORZIONATO
+   RESPONSIVE DESIGN OTTIMIZZATO
    ======================================== */
 @media (max-width: 992px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .download-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-content {
-        flex-direction: column;
-        gap: 40px;
-        padding-bottom: 30px;
-    }
-    
-    .footer-brand {
-        max-width: 100%;
-        text-align: center;
-    }
-    
-    .footer-logo-container {
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    
-    .footer-logo {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .footer-links-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-    
     .footer-bottom-container {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
         text-align: center;
     }
     
-    .software-logo-wrapper,
-    .developer-logo-wrapper {
+    .software-logo-wrapper {
         justify-content: center;
     }
     
-    .developer-brand {
+    .n8s-brand {
         justify-content: center;
     }
     
-    .author-card {
-        flex-direction: column;
-        text-align: center;
+    .n8s-logo-container {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px 10px;
+    }
+    
+    .copyright-center {
+        min-width: 250px;
     }
 }
 
 @media (max-width: 768px) {
-    .nav {
-        display: none;
+    .footer-bottom {
+        padding: 15px 0;
     }
     
-    .hero {
-        padding: 80px 20px 60px;
-    }
-    
-    .hero-logo-image {
-        width: 90px;
-        height: 90px;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    .features-grid,
-    .screenshots-grid,
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .section-title h2 {
-        font-size: 2rem;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-    }
-    
-    .requirements-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer {
-        padding: 40px 0 0;
-    }
-    
-    .footer-links-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    
-    .footer-logo {
-        width: 40px;
-        height: 40px;
-        padding: 6px;
-    }
-    
-    .footer-brand-text h3 {
-        font-size: 1.2rem;
+    .footer-bottom-container {
+        gap: 15px;
     }
     
     .software-logo {
-        width: 28px;
-        height: 28px;
+        width: 24px;
+        height: 24px;
     }
     
-    .developer-logo {
-        width: 22px;
-        height: 22px;
+    .software-name {
+        font-size: 0.75rem;
+    }
+    
+    .software-version {
+        font-size: 0.65rem;
     }
     
     .copyright-main {
@@ -1615,112 +1548,111 @@ section {
     }
     
     .copyright-notes p {
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero {
-        padding: 60px 20px 40px;
+        font-size: 0.72rem;
     }
     
-    .hero-logo-image {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-    
-    .section-title h2 {
-        font-size: 1.8rem;
-    }
-    
-    .download-card {
-        padding: 30px 20px;
-    }
-    
-    .btn {
-        padding: 12px 24px;
-        font-size: 1rem;
-    }
-    
-    .btn-download {
-        padding: 16px 40px;
-        font-size: 1.2rem;
-    }
-    
-    section {
-        padding: 48px 0;
-    }
-    
-    .requirements-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .feature-card,
-    .info-box {
-        padding: 24px;
-    }
-    
-    .footer-content {
-        padding: 0 15px 25px;
-    }
-    
-    .footer-bottom-container {
-        padding: 0 15px;
-    }
-    
-    .footer-logo {
+    /* Logo Nogar8System per mobile */
+    .n8s-logo {
         width: 35px;
         height: 35px;
     }
     
-    .software-logo-wrapper,
-    .developer-logo-wrapper {
+    .n8s-name {
+        font-size: 0.85rem;
+    }
+    
+    .n8s-tag {
+        font-size: 0.7rem;
+    }
+    
+    .n8s-logo-container {
+        padding: 6px 10px;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-bottom-container {
+        padding: 0 15px;
+        gap: 12px;
+    }
+    
+    .software-logo-wrapper {
         flex-direction: column;
-        text-align: center;
         gap: 5px;
+        text-align: center;
     }
     
     .software-logo {
-        width: 25px;
-        height: 25px;
-    }
-    
-    .developer-logo {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .software-name,
-    .developer-name {
-        font-size: 0.75rem;
-    }
-    
-    .software-version,
-    .developer-tag {
-        font-size: 0.65rem;
+        width: 22px;
+        height: 22px;
     }
     
     .copyright-center {
-        min-width: 200px;
+        min-width: 220px;
+    }
+    
+    .copyright-main {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    .copyright-notes p {
+        font-size: 0.68rem;
+    }
+    
+    /* Logo Nogar8System per mobile piccolo */
+    .n8s-logo-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .n8s-logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .n8s-text {
+        text-align: center;
+    }
+    
+    .n8s-name {
+        font-size: 0.8rem;
+    }
+    
+    .n8s-tag {
+        font-size: 0.65rem;
     }
 }
 
 /* ========================================
-   ANIMAZIONI AGGIUNTIVE
+   EFFETTI SPECIALI LOGO NOGAR8SYSTEM
    ======================================== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+@keyframes n8s-glow {
+    0%, 100% { 
+        filter: brightness(0) invert(1) drop-shadow(0 0 0px rgba(255, 255, 255, 0));
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    50% { 
+        filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
     }
+}
+
+.n8s-logo {
+    animation: n8s-glow 3s ease-in-out infinite;
+}
+
+.n8s-logo:hover {
+    animation: none;
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+/* Ombra per profondità */
+.n8s-logo {
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .feature-card,
