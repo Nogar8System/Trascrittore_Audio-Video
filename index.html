@@ -8,6 +8,95 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Stili per il popup di download */
+        .download-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 99999;
+            padding: 0;
+            border: 3px solid #4CAF50;
+            min-width: 350px;
+            max-width: 500px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .dark-mode .download-popup {
+            background: #2d2d2d;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+        }
+
+        .popup-header i {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .popup-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .popup-body {
+            padding: 25px 20px;
+        }
+
+        .popup-body p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .popup-body .small {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .dark-mode .popup-body .small {
+            color: #aaa;
+        }
+
+        .popup-footer {
+            padding: 15px;
+            background: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        .dark-mode .popup-footer {
+            background: #3d3d3d;
+            border-top: 1px solid #555;
+        }
+
+        .popup-close {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .popup-close:hover {
+            background: #45a049;
+        }
+    </style>
 </head>
 <body>
     <!-- BACKGROUND CON LOGO SFUMATO -->
@@ -343,42 +432,42 @@
                 </div>
             </section>
 
-			<!-- DOWNLOAD SECTION - MODIFICATO -->
-			<section id="download">
-				<div id="download-button" class="section-title">
-					<h2><i class="fas fa-download"></i> Scarica Subito Gratuitamente</h2>
-					<p>Ottieni l'ultima versione del Trascrittore Audio/Video v4.3.0</p>
-				</div>
+            <!-- DOWNLOAD SECTION - MODIFICATA CON PULSANTE -->
+            <section id="download">
+                <div id="download-button" class="section-title">
+                    <h2><i class="fas fa-download"></i> Scarica Subito Gratuitamente</h2>
+                    <p>Ottieni l'ultima versione del Trascrittore Audio/Video v4.3.0</p>
+                </div>
 
-				<div class="download-grid">
-					<div class="download-card">
-						<div class="download-logo">
-							<img src="image/logo.png" alt="Trascrittore Audio/Video Logo">
-						</div>
-						<h3>Trascrittore Audio/Video</h3>
-						<div class="version-badge">v4.3.0 - Ultima Versione</div>
-						
-						<ul class="download-features">
-							<li><i class="fas fa-check-circle"></i> Installazione automatica</li>
-							<li><i class="fas fa-check-circle"></i> AssemblyAI integrato</li>
-							<li><i class="fas fa-check-circle"></i> Supporto multi-lingua</li>
-							<li><i class="fas fa-check-circle"></i> Dimensione: ~45 MB</li>
-							<li><i class="fas fa-check-circle"></i> Trial 15 giorni</li>
-							<li><i class="fas fa-check-circle"></i> Assistenza gratuita</li>
-							<li><i class="fas fa-check-circle"></i> FFmpeg automatico</li>
-							<li><i class="fas fa-check-circle"></i> Aggiornamenti automatici</li>
-						</ul>
+                <div class="download-grid">
+                    <div class="download-card">
+                        <div class="download-logo">
+                            <img src="image/logo.png" alt="Trascrittore Audio/Video Logo">
+                        </div>
+                        <h3>Trascrittore Audio/Video</h3>
+                        <div class="version-badge">v4.3.0 - Ultima Versione</div>
+                        
+                        <ul class="download-features">
+                            <li><i class="fas fa-check-circle"></i> Installazione automatica</li>
+                            <li><i class="fas fa-check-circle"></i> AssemblyAI integrato</li>
+                            <li><i class="fas fa-check-circle"></i> Supporto multi-lingua</li>
+                            <li><i class="fas fa-check-circle"></i> Dimensione: ~45 MB</li>
+                            <li><i class="fas fa-check-circle"></i> Trial 15 giorni</li>
+                            <li><i class="fas fa-check-circle"></i> Assistenza gratuita</li>
+                            <li><i class="fas fa-check-circle"></i> FFmpeg automatico</li>
+                            <li><i class="fas fa-check-circle"></i> Aggiornamenti automatici</li>
+                        </ul>
 
-						<!-- MODIFICA QUI: Sostituisci il link con un pulsante -->
-						<button class="btn btn-download btn-xl" onclick="startDownload()">
-							<i class="fas fa-download"></i> SCARICA ORA (GRATIS)
-						</button>
+                        <!-- PULSANTE MODIFICATO - non mostra link al passaggio del mouse -->
+                        <button class="btn btn-download btn-xl" onclick="startDownload()">
+                            <i class="fas fa-download"></i> SCARICA ORA (GRATIS)
+                        </button>
 
-						<div class="file-info">
-							<i class="fas fa-info-circle"></i>
-							<span>File: Trascrittore_Audio_Video.exe • Dimensione: ~45 MB</span>
-						</div>
-					</div>
+                        <div class="file-info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>File: Trascrittore_Audio_Video.exe • Dimensione: ~45 MB</span>
+                        </div>
+                    </div>
 
                     <div class="download-info">
                         <div class="info-card">
@@ -636,7 +725,24 @@
 			</div>
 		</footer>
 
-		<!-- Aggiungi prima dello script esistente -->
+		<!-- POPUP DI DOWNLOAD (inizialmente nascosto) -->
+		<div id="downloadPopup" class="download-popup">
+			<div class="popup-content">
+				<div class="popup-header">
+					<i class="fas fa-download"></i>
+					<h3>Download in corso...</h3>
+				</div>
+				<div class="popup-body">
+					<p><strong>Trascrittore Audio/Video v4.3.0</strong></p>
+					<p>Il download è stato avviato.</p>
+					<p class="small">Se non vedi il download, controlla la cartella Downloads del tuo browser.</p>
+				</div>
+				<div class="popup-footer">
+					<button class="popup-close" onclick="closeDownloadPopup()">Chiudi</button>
+				</div>
+			</div>
+		</div>
+
 		<script>
 			// Imposta dinamicamente l'anno corrente nel footer
 			document.addEventListener('DOMContentLoaded', () => {
@@ -654,11 +760,102 @@
     </button>
 
     <script>
-        // Funzione per tracciare il download
-        function trackDownload() {
-            console.log('Download avviato - Trascrittore Audio/Video v4.3.0');
-            alert('✅ Download avviato!\n\nIl file verrà scaricato nella cartella Downloads.\n\nDopo il download, esegui il file .exe per installare il software.');
+        // ============================================
+        // FUNZIONE DI DOWNLOAD CORRETTA - UN SOLO DOWNLOAD
+        // ============================================
+        
+        // Variabile per prevenire download multipli
+        let downloadInProgress = false;
+        
+        // Funzione per avviare il download senza mostrare il link
+        function startDownload() {
+            // Previene download multipli
+            if (downloadInProgress) {
+                return;
+            }
+            
+            downloadInProgress = true;
+            
+            // Mostra il popup di download
+            showDownloadPopup();
+            
+            // URL del file da scaricare
+            const downloadUrl = 'https://www.sunredline.org/Pubblica/Trascrizione_AssemblyAI/AssemblyAI_Setup.exe';
+            
+            // SINGOLO METODO: Apri in nuova finestra (funziona per tutti i browser)
+            // Opzioni per rendere la finestra meno visibile
+            const features = 'width=1,height=1,left=9999,top=9999,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,resizable=no';
+            const newWindow = window.open(downloadUrl, '_blank', features);
+            
+            // Chiudi la finestra dopo 3 secondi (il download continuerà)
+            setTimeout(() => {
+                if (newWindow && !newWindow.closed) {
+                    newWindow.close();
+                }
+                // Ripristina il flag dopo che il download è stato avviato
+                setTimeout(() => {
+                    downloadInProgress = false;
+                }, 1000);
+            }, 3000);
+            
+            // Traccia il download nella console
+            console.log('Download avviato: Trascrittore Audio/Video v4.3.0');
+            
+            // Fallback: Se window.open è bloccato, usa un iframe
+            setTimeout(() => {
+                if (!newWindow || newWindow.closed) {
+                    // Crea un iframe invisibile
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = downloadUrl;
+                    document.body.appendChild(iframe);
+                    
+                    // Rimuovi l'iframe dopo 5 secondi
+                    setTimeout(() => {
+                        if (iframe.parentElement) {
+                            iframe.parentElement.removeChild(iframe);
+                        }
+                        downloadInProgress = false;
+                    }, 5000);
+                }
+            }, 100);
         }
+        
+        // Funzione per mostrare il popup di download
+        function showDownloadPopup() {
+            const popup = document.getElementById('downloadPopup');
+            if (popup) {
+                popup.style.display = 'block';
+                
+                // Chiudi automaticamente dopo 6 secondi
+                setTimeout(() => {
+                    closeDownloadPopup();
+                }, 6000);
+            }
+        }
+        
+        // Funzione per chiudere il popup di download
+        function closeDownloadPopup() {
+            const popup = document.getElementById('downloadPopup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }
+        
+        // Chiudi il popup se si clicca fuori da esso
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('downloadPopup');
+            if (popup && popup.style.display === 'block') {
+                const popupContent = popup.querySelector('.popup-content');
+                if (!popupContent.contains(event.target) && !event.target.classList.contains('btn-download')) {
+                    closeDownloadPopup();
+                }
+            }
+        });
+
+        // ============================================
+        // FUNZIONI ESISTENTI
+        // ============================================
 
         // Funzione per lo scroll to top
         function scrollToTop() {
@@ -756,9 +953,6 @@
                 langDropdown.classList.remove('active');
             }
         });
-
-        // Rimossa l'animazione problematica che causava lo sfarfallio
-        // Non c'è più il blocco che impostava opacity a 0 e poi a 1
 
         // Effetto hover per le feature cards
         document.querySelectorAll('.feature-card').forEach(card => {

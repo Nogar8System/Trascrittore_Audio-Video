@@ -8,6 +8,95 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Stile für das Download-Popup */
+        .download-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 99999;
+            padding: 0;
+            border: 3px solid #4CAF50;
+            min-width: 350px;
+            max-width: 500px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .dark-mode .download-popup {
+            background: #2d2d2d;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+        }
+
+        .popup-header i {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .popup-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .popup-body {
+            padding: 25px 20px;
+        }
+
+        .popup-body p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .popup-body .small {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .dark-mode .popup-body .small {
+            color: #aaa;
+        }
+
+        .popup-footer {
+            padding: 15px;
+            background: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        .dark-mode .popup-footer {
+            background: #3d3d3d;
+            border-top: 1px solid #555;
+        }
+
+        .popup-close {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .popup-close:hover {
+            background: #45a049;
+        }
+    </style>
 </head>
 <body>
     <!-- HINTERGRUND MIT VERSCHWOMENEM LOGO -->
@@ -343,7 +432,7 @@
                 </div>
             </section>
 
-            <!-- DOWNLOAD-BEREICH -->
+            <!-- DOWNLOAD-BEREICH - MODIFIZIERT MIT KNOPS -->
             <section id="download">
                 <div id="download-button" class="section-title">
                     <h2><i class="fas fa-download"></i> Jetzt Kostenlos Herunterladen</h2>
@@ -369,12 +458,10 @@
                             <li><i class="fas fa-check-circle"></i> Automatische Updates</li>
                         </ul>
 
-						<a href="https://www.sunredline.org/Pubblica/Trascrizione_AssemblyAI/AssemblyAI_Setup.exe" 
-                           download="Trascrittore_Audio_Video_v4.3.0.exe"
-                           class="btn btn-download btn-xl"
-                           onclick="trackDownload()">
+                        <!-- MODIFIZIERT: Link durch Knopf ersetzen -->
+                        <button class="btn btn-download btn-xl" onclick="startDownload()">
                             <i class="fas fa-download"></i> JETZT HERUNTERLADEN (KOSTENLOS)
-                        </a>
+                        </button>
 
                         <div class="file-info">
                             <i class="fas fa-info-circle"></i>
@@ -557,7 +644,7 @@
 						<ul>
 							<li><a href="#features" aria-label="Zum Bereich Funktionen gehen">Funktionen</a></li>
 							<li><a href="#screenshots" aria-label="Zum Bereich Screenshots gehen">Screenshots</a></li>
-							<li><a href="#download" aria-label="Zum Bereich Download gehen">Download</a></li>
+						 <li><a href="#download" aria-label="Zum Bereich Download gehen">Download</a></li>
 							<li><a href="#manual" aria-label="Zum Bereich Informationen gehen">Informationen</a></li>
 						</ul>
 					</div>
@@ -638,7 +725,24 @@
 			</div>
 		</footer>
 
-		<!-- Vor vorhandenem Skript hinzufügen -->
+		<!-- DOWNLOAD-POPUP (zunächst ausgeblendet) -->
+		<div id="downloadPopup" class="download-popup">
+			<div class="popup-content">
+				<div class="popup-header">
+					<i class="fas fa-download"></i>
+					<h3>Download läuft...</h3>
+				</div>
+				<div class="popup-body">
+					<p><strong>Audio/Video-Transkriptor v4.3.0</strong></p>
+					<p>Der Download wurde gestartet.</p>
+					<p class="small">Wenn Sie den Download nicht sehen, überprüfen Sie den Download-Ordner Ihres Browsers.</p>
+				</div>
+				<div class="popup-footer">
+					<button class="popup-close" onclick="closeDownloadPopup()">Schließen</button>
+				</div>
+			</div>
+		</div>
+
 		<script>
 			// Setzt dynamisch das aktuelle Jahr in der Fußzeile
 			document.addEventListener('DOMContentLoaded', () => {
@@ -656,11 +760,102 @@
     </button>
 
     <script>
-        // Funktion zum Verfolgen des Downloads
-        function trackDownload() {
-            console.log('Download gestartet - Audio/Video-Transkriptor v4.3.0');
-            alert('✅ Download gestartet!\n\nDie Datei wird im Download-Ordner gespeichert.\n\nNach dem Download führen Sie die .exe-Datei aus, um die Software zu installieren.');
+        // ============================================
+        // MODIFIZIERTE DOWNLOAD-FUNKTION - EINZELNER DOWNLOAD
+        // ============================================
+        
+        // Variable zur Verhinderung mehrerer Downloads
+        let downloadInProgress = false;
+        
+        // Funktion zum Starten des Downloads ohne Link-Anzeige
+        function startDownload() {
+            // Verhindert mehrere Downloads
+            if (downloadInProgress) {
+                return;
+            }
+            
+            downloadInProgress = true;
+            
+            // Zeige das Download-Popup
+            showDownloadPopup();
+            
+            // URL der herunterzuladenden Datei
+            const downloadUrl = 'https://www.sunredline.org/Pubblica/Trascrizione_AssemblyAI/AssemblyAI_Setup.exe';
+            
+            // EINZIGE METHODE: In neuem Fenster öffnen (funktioniert für alle Browser)
+            // Optionen, um das Fenster weniger sichtbar zu machen
+            const features = 'width=1,height=1,left=9999,top=9999,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,resizable=no';
+            const newWindow = window.open(downloadUrl, '_blank', features);
+            
+            // Schließe das Fenster nach 3 Sekunden (der Download läuft weiter)
+            setTimeout(() => {
+                if (newWindow && !newWindow.closed) {
+                    newWindow.close();
+                }
+                // Setze das Flag zurück, nachdem der Download gestartet wurde
+                setTimeout(() => {
+                    downloadInProgress = false;
+                }, 1000);
+            }, 3000);
+            
+            // Verfolge den Download in der Konsole
+            console.log('Download gestartet: Audio/Video-Transkriptor v4.3.0');
+            
+            // Fallback: Wenn window.open blockiert ist, verwende einen iFrame
+            setTimeout(() => {
+                if (!newWindow || newWindow.closed) {
+                    // Erstelle einen unsichtbaren iFrame
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = downloadUrl;
+                    document.body.appendChild(iframe);
+                    
+                    // Entferne den iFrame nach 5 Sekunden
+                    setTimeout(() => {
+                        if (iframe.parentElement) {
+                            iframe.parentElement.removeChild(iframe);
+                        }
+                        downloadInProgress = false;
+                    }, 5000);
+                }
+            }, 100);
         }
+        
+        // Funktion zum Anzeigen des Download-Popups
+        function showDownloadPopup() {
+            const popup = document.getElementById('downloadPopup');
+            if (popup) {
+                popup.style.display = 'block';
+                
+                // Schließe automatisch nach 6 Sekunden
+                setTimeout(() => {
+                    closeDownloadPopup();
+                }, 6000);
+            }
+        }
+        
+        // Funktion zum Schließen des Download-Popups
+        function closeDownloadPopup() {
+            const popup = document.getElementById('downloadPopup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }
+        
+        // Schließe das Popup, wenn außerhalb geklickt wird
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('downloadPopup');
+            if (popup && popup.style.display === 'block') {
+                const popupContent = popup.querySelector('.popup-content');
+                if (!popupContent.contains(event.target) && !event.target.classList.contains('btn-download')) {
+                    closeDownloadPopup();
+                }
+            }
+        });
+
+        // ============================================
+        // VORHANDENE FUNKTIONEN
+        // ============================================
 
         // Funktion zum Nach-oben-Scrollen
         function scrollToTop() {
@@ -758,9 +953,6 @@
                 langDropdown.classList.remove('active');
             }
         });
-
-        // Problematiche Animation, die Flackern verursacht, wurde entfernt
-        // Es gibt keinen Block mehr, der die Deckkraft auf 0 und dann auf 1 setzt
 
         // Hover-Effekt für Feature-Karten
         document.querySelectorAll('.feature-card').forEach(card => {
