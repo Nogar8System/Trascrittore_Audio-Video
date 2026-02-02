@@ -224,10 +224,12 @@
         .logo-container {
             text-decoration: none;
             color: inherit;
+            cursor: pointer;
         }
 
         .logo-container:hover {
             text-decoration: none;
+            opacity: 0.9;
         }
 
         /* Stili per il link nel footer */
@@ -236,6 +238,7 @@
             color: inherit;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
 
         .developer-brand:hover {
@@ -251,11 +254,11 @@
     </div>
 
     <div class="container">
-        <!-- HEADER CON LOGO - RIPRISTINATO IL LINK -->
+        <!-- HEADER CON LOGO - MODIFICATO: Sostituito link con div -->
         <header class="header">
             <div class="header-content">
-                <!-- MODIFICATO: Ripristinato il link -->
-                <a href="https://nogar8system.github.io/" class="logo-container">
+                <!-- MODIFICATO: Sostituito <a> con <div> -->
+                <div class="logo-container" onclick="window.location.href='https://nogar8system.github.io/'">
                     <div class="logo-wrapper">
                         <div class="logo-main">
                             <img src="image/logo.png" alt="Trascrittore Audio/Video Logo" class="logo-image">
@@ -265,11 +268,11 @@
                             <span class="version">Versione 4.3.0</span>
                         </div>
                     </div>
-                </a>
+                </div>
 
                 <nav class="nav">
-                    <!-- MODIFICATO: Sostituito <a> con <button> e rimosso active -->
-                    <button class="nav-button" onclick="scrollToSection('features')">Home</button>
+                    <!-- MODIFICATO: Home ora chiama scrollToTop() invece di scrollToSection('features') -->
+                    <button class="nav-button" onclick="scrollToTop()">Home</button>
                     <button class="nav-button" onclick="scrollToSection('features')">Funzionalità</button>
                     <button class="nav-button" onclick="scrollToSection('screenshots')">Anteprime</button>
                     <button class="nav-button" onclick="scrollToSection('download')">Scarica</button>
@@ -793,6 +796,7 @@
                     <div class="footer-section">
                         <h4>Navigazione</h4>
                         <ul>
+                            <li><span onclick="scrollToTop()" style="cursor: pointer;">Home</span></li>
                             <li><span onclick="scrollToSection('features')" style="cursor: pointer;">Funzionalità</span></li>
                             <li><span onclick="scrollToSection('screenshots')" style="cursor: pointer;">Anteprime</span></li>
                             <li><span onclick="scrollToSection('download')" style="cursor: pointer;">Download</span></li>
@@ -849,8 +853,8 @@
                         </div>
                     </div>
 
-                    <!-- Logo N8S con dimensioni corrette - MODIFICATO: Aggiunto link -->
-                    <a href="https://nogar8system.github.io/" class="developer-brand">
+                    <!-- Logo N8S con dimensioni corrette - MODIFICATO: Sostituito link con div -->
+                    <div class="developer-brand" onclick="window.location.href='https://nogar8system.github.io/'">
                         <div class="developer-logo-wrapper">
                             <img src="image/N8S.png" alt="Nogar8System - Sistemi Informatici" 
                                  class="developer-logo" loading="lazy">
@@ -859,7 +863,7 @@
                                 <span class="developer-tag">Sviluppo Software</span>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 
                 <!-- Badge di conformità -->
