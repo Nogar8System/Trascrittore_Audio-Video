@@ -1360,7 +1360,7 @@ section {
 /* Spazio vuoto per sinistra - Mantiene il layout bilanciato */
 .footer-left-space {
     flex: 1;
-    min-width: 160px;
+    min-width: 10px;
     /* Questo spazio rimane vuoto */
 }
 
