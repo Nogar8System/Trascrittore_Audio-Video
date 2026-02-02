@@ -1458,8 +1458,8 @@ section {
 
 /* LOGO NOGAR8SYSTEM - Dimensioni ottimali per visibilità */
 .n8s-logo {
-    width: 40px;  /* DIMENSIONE PERFETTA per essere visibile */
-    height: 40px; /* DIMENSIONE PERFETTA per essere visibile */
+    width: 20px;  /* DIMENSIONE PERFETTA per essere visibile */
+    height: 20px; /* DIMENSIONE PERFETTA per essere visibile */
     object-fit: contain;
     filter: brightness(0) invert(1);
     opacity: 0.95;
