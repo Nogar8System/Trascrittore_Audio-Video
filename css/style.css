@@ -1202,7 +1202,18 @@ section {
     width: 100%;
 }
 
-/* LOGO FOOTER OTTIMIZZATO */
+/* ========================================
+   FOOTER – LOGHI OTTIMIZZATI
+   ======================================== */
+
+/* Contenitore logo + testo */
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* LOGO PRINCIPALE FOOTER */
 .footer-logo {
     width: 40px;
     height: 40px;
@@ -1210,25 +1221,72 @@ section {
     padding: 6px;
     border-radius: 8px;
 
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 
     box-shadow:
         0 2px 6px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
     transition: transform 0.25s ease, background 0.25s ease;
-    animation: subtle-pulse 4s ease-in-out infinite;
 }
 
+/* Hover discreto */
 .footer-logo:hover {
     transform: scale(1.04);
-    background: rgba(255, 255, 255, 0.1);
-    animation: none;
+    background: rgba(255, 255, 255, 0.12);
 }
 
-/* Animazione più discreta */
-@keyframes subtle-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.015); }
+/* Testo brand footer */
+.footer-brand-text h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.footer-version {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* ========================================
+   FOOTER BOTTOM – LOGO SOFTWARE
+   ======================================== */
+
+.software-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.software-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    padding: 4px;
+    border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.software-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.software-version {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* ========================================
+   DARK MODE FIX (coerenza visiva)
+   ======================================== */
+
+body.dark-mode .footer-logo,
+body.dark-mode .software-logo {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
 }
