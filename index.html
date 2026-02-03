@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trascrittore Audio/Video con AssemblyAI - Converti automaticamente audio e video in testo con riconoscimento vocale avanzato">
+    <title>Trascrittore Audio/Video con AssemblyAI v4.3.0 - Italiano</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Stili per il popup di download */
+        .download-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 99999;
+            padding: 0;
+            border: 3px solid #4CAF50;
+            min-width: 350px;
+            max-width: 500px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .dark-mode .download-popup {
+            background: #2d2d2d;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+        }
+
+        .popup-header i {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .popup-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .popup-body {
+            padding: 25px 20px;
+        }
+
+        .popup-body p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .popup-body .small {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .dark-mode .popup-body .small {
+            color: #aaa;
+        }
+
+        .popup-footer {
+            padding: 15px;
+            background: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        .dark-mode .popup-footer {
+            background: #3d3d3d;
+            border-top: 1px solid #555;
+        }
+
+        .popup-close {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .popup-close:hover {
+            background: #45a049;
+        }
+
+        /* Stili per i pulsanti di navigazione modificati */
+        .nav-button {
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        /* Effetto hover per i pulsanti di navigazione */
+        .nav-button:hover {
+            background-color: #4CAF50 !important;
+            color: white !important;
+        }
+
+        .nav-button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .hero-button {
+            background: none;
+            border: none;
+            font: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Stili per il selettore lingua - RIPRISTINATI alla versione originale */
+        .lang-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-current {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .lang-current:hover {
+            background-color: #4CAF50 !important;
+            color: white !important;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            min-width: 150px;
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .dark-mode .lang-dropdown {
+            background: #2d2d2d;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .lang-dropdown.active {
+            display: block;
+        }
+
+        .lang-dropdown span {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode .lang-dropdown span {
+            color: white;
+        }
+
+        .lang-dropdown span:hover {
+            background-color: #4CAF50 !important;
+            color: white !important;
+        }
+
+        /* Stili per il link del logo nell'header */
+        .logo-container {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .logo-container:hover {
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        /* Stili per il link nel footer */
+        .developer-brand {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .developer-brand:hover {
+            text-decoration: none;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- BACKGROUND CON LOGO SFUMATO -->
+    <div class="background-logo">
+        <div class="logo-watermark"></div>
+    </div>
+
+    <div class="container">
+        <!-- HEADER CON LOGO - MODIFICATO: Sostituito link con div -->
+        <header class="header">
+            <div class="header-content">
+                <!-- MODIFICATO: Sostituito <a> con <div> -->
+                <div class="logo-container" onclick="window.location.href='https://nogar8system.github.io/'">
+                    <div class="logo-wrapper">
+                        <div class="logo-main">
+                            <img src="image/logo.png" alt="Trascrittore Audio/Video Logo" class="logo-image">
+                        </div>
+                        <div class="logo-text">
+                            <h1>Trascrittore Audio/Video</h1>
+                            <span class="version">Versione 4.3.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="nav">
+                    <!-- MODIFICATO: Home ora chiama scrollToTop() invece di scrollToSection('features') -->
+                    <button class="nav-button" onclick="scrollToTop()">Home</button>
+                    <button class="nav-button" onclick="scrollToSection('features')">Funzionalità</button>
+                    <button class="nav-button" onclick="scrollToSection('screenshots')">Anteprime</button>
+                    <button class="nav-button" onclick="scrollToSection('download')">Scarica</button>
+                    <button class="nav-button" onclick="scrollToSection('manual')">Info</button>
+
+                    <!-- Language Selector RIPRISTINATO con grafica originale -->
+                    <div class="lang-selector">
+                        <div class="lang-current" onclick="toggleLanguageDropdown()">
+                            <span>Italiano</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="lang-dropdown" id="languageDropdown">
+                            <span onclick="changeLanguage('en')">English</span>
+                            <span onclick="changeLanguage('es')">Español</span>
+                            <span onclick="changeLanguage('de')">Deutsch</span>
+                            <span onclick="changeLanguage('fr')">Français</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- HERO SECTION CON LOGO PROMINENTE -->
+        <section class="hero hero-with-bg">
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <img src="image/logo.png" alt="Trascrittore Audio/Video Logo" class="hero-logo-image">
+                </div>
+                <h1>Trascrittore Audio/Video</h1>
+                <p>Converti automaticamente audio e video in testo con riconoscimento vocale avanzato usando AssemblyAI</p>
+                <div class="hero-buttons">
+                    <!-- MODIFICATO: Sostituito <a> con <button> -->
+                    <button class="hero-button btn-primary" onclick="scrollToSection('download')">
+                        <i class="fas fa-download"></i> Scarica Gratis (v4.3.0)
+                    </button>                
+                    <button class="hero-button btn-secondary" onclick="scrollToSection('manual')">
+                        <i class="fas fa-book"></i> Guida Completa
+                    </button>
+                </div>
+                <div class="file-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>File: Trascrittore_Audio_Video.exe • Dimensione: ~45 MB</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- FEATURES SECTION -->
+            <section id="features">
+                <div class="section-title">
+                    <h2><i class="fas fa-star"></i> Funzionalità Principali</h2>
+                    <p>Scopri tutte le potenti funzionalità del Trascrittore Audio/Video</p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Trascrizione Avanzata -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <h3>Trascrizione Professionale</h3>
+                        <p>Converti audio e video in testo con AssemblyAI, riconoscimento parlanti, supporto italiano e punteggiatura automatica.</p>
+                        <div class="feature-preview transcription-preview">
+                            <span>🎙️ Speaker 1: Buongiorno a tutti...</span>
+                            <span>🗣️ Speaker 2: Grazie per essere qui...</span>
+                        </div>
+                    </div>
+
+                    <!-- Supporto Multi-Formato -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-audio"></i>
+                        </div>
+                        <h3>Supporto Multi-Formato</h3>
+                        <p>Gestisci MP3, WAV, M4A, MP4, MKV. Conversione automatica video in audio con FFmpeg integrato.</p>
+                        <div class="format-icons">
+                            <i class="fab fa-mp3" title="MP3"></i>
+                            <i class="fas fa-wave-square" title="WAV"></i>
+                            <i class="fas fa-file-audio" title="M4A"></i>
+                            <i class="fab fa-youtube" title="MP4"></i>
+                            <i class="fas fa-video" title="MKV"></i>
+                        </div>
+                    </div>
+
+                    <!-- Estrazione Sottotitoli -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-closed-captioning"></i>
+                        </div>
+                        <h3>Estrazione Sottotitoli</h3>
+                        <p>Estrai automaticamente sottotitoli embedded da file video. Supporto SRT e formati testuali integrati.</p>
+                        <div class="feature-badge">
+                            <i class="fas fa-closed-captioning"></i> Sottotitoli Automatici
+                        </div>
+                    </div>
+
+                    <!-- Text-to-Speech -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <h3>Text-to-Speech</h3>
+                        <p>Converti testo in audio con gTTS, sintesi vocale italiana, salvataggio MP3 e riproduzione integrata.</p>
+                        <div class="feature-badge">
+                            <i class="fas fa-robot"></i> Sintesi Vocale
+                        </div>
+                    </div>
+
+                    <!-- Gestione API Key -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3>Gestione API Key Sicura</h3>
+                        <p>Gestione multipla API Key AssemblyAI con crittografia AES-256, selezione dinamica e backup sicuro.</p>
+                        <div class="feature-badge security">
+                            <i class="fas fa-shield-alt"></i> Crittografato
+                        </div>
+                    </div>
+
+                    <!-- Sistema Attivazione -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3>Sistema di Attivazione</h3>
+                        <p>Trial 15 giorni, attivazione licenza JWT, verifica online/offline e gestione utente professionale.</p>
+                        <div class="activation-preview">
+                            <i class="fas fa-clock"></i> 15 giorni trial
+                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-key"></i> Attivazione
+                        </div>
+                    </div>
+
+                    <!-- 🆕 Download Automatico FFmpeg -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3>FFmpeg Automatico</h3>
+                        <p>Download e installazione automatica di FFmpeg all'avvio. Nessuna configurazione manuale richiesta.</p>
+                        <div class="feature-badge">
+                            <i class="fas fa-magic"></i> Installazione Automatica
+                        </div>
+                    </div>
+
+                    <!-- Salvataggio Multi-Formato -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-save"></i>
+                        </div>
+                        <h3>Salvataggio Multi-Formato</h3>
+                        <p>Esporta trascrizioni in TXT, DOCX formattato. Salva audio estratto in MP3 con metadati personalizzati.</p>
+                        <div class="format-badges">
+                            <span class="format-badge">.txt</span>
+                            <span class="format-badge">.docx</span>
+                            <span class="format-badge">.mp3</span>
+                        </div>
+                    </div>
+
+                    <!-- Interfaccia Moderna -->
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Interfaccia Moderna</h3>
+                        <p>Design intuitivo Tkinter, scorciatoie tastiera, menu contestuali e tema chiaro/scuro.</p>
+                        <div class="feature-badge">
+                            <i class="fas fa-paint-brush"></i> UI Ottimizzata
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREENSHOTS SECTION -->
+            <section id="screenshots">
+                <div class="section-title">
+                    <h2><i class="fas fa-images"></i> Anteprime dell'Applicazione</h2>
+                    <p>Guarda il software in azione</p>
+                </div>
+
+                <div class="screenshots-grid">
+                    <div class="screenshot-card">
+                        <div class="screenshot-header">
+                            <i class="fas fa-home"></i> Dashboard Principale
+                        </div>
+                        <div class="screenshot-body">
+                            <div class="screenshot-img">
+                                <div class="screenshot-placeholder">
+                                    <div class="placeholder-logo">
+                                        <img src="image/logo.png" alt="Logo">
+                                    </div>
+                                    <i class="fas fa-desktop"></i>
+                                    <div class="placeholder-text">Interfaccia principale organizzata</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-footer">
+                            <p>Dashboard intuitiva con accesso rapido a tutte le funzionalità principali</p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-card">
+                        <div class="screenshot-header">
+                            <i class="fas fa-sliders-h"></i> Configurazione Trascrizione
+                        </div>
+                        <div class="screenshot-body">
+                            <div class="screenshot-img">
+                                <div class="screenshot-placeholder">
+                                    <div class="placeholder-logo">
+                                        <img src="image/logo.png" alt="Logo">
+                                    </div>
+                                    <i class="fas fa-cog"></i>
+                                    <div class="placeholder-text">Impostazioni trascrizione avanzate</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-footer">
+                            <p>Configurazione API Key, selezione lingua e opzioni avanzate</p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-card">
+                        <div class="screenshot-header">
+                            <i class="fas fa-file-alt"></i> Trascrizione in Tempo Reale
+                        </div>
+                        <div class="screenshot-body">
+                            <div class="screenshot-img">
+                                <div class="screenshot-placeholder">
+                                    <div class="placeholder-logo">
+                                        <img src="image/logo.png" alt="Logo">
+                                    </div>
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <div class="placeholder-text">Trascrizione in corso...</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-footer">
+                            <p>Monitoraggio progresso trascrizione con dettaglio parlanti</p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-card">
+                        <div class="screenshot-header">
+                            <i class="fas fa-key"></i> Gestione API Keys
+                        </div>
+                        <div class="screenshot-body">
+                            <div class="screenshot-img">
+                                <div class="screenshot-placeholder">
+                                    <div class="placeholder-logo">
+                                        <img src="image/logo.png" alt="Logo">
+                                    </div>
+                                    <i class="fas fa-key"></i>
+                                    <div class="placeholder-text">Gestione chiavi sicura</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-footer">
+                            <p>Interfaccia crittografata per gestione multipla API Keys</p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-card">
+                        <div class="screenshot-header">
+                            <i class="fas fa-robot"></i> Text-to-Speech
+                        </div>
+                        <div class="screenshot-body">
+                            <div class="screenshot-img">
+                                <div class="screenshot-placeholder">
+                                    <div class="placeholder-logo">
+                                        <img src="image/logo.png" alt="Logo">
+                                    </div>
+                                    <i class="fas fa-volume-up"></i>
+                                    <div class="placeholder-text">Sintesi vocale testo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-footer">
+                            <p>Conversione testo in audio con gTTS integrato</p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-card">
+                        <div class="screenshot-header">
+                            <i class="fas fa-clipboard-list"></i> Risultati Trascrizione
+                        </div>
+                        <div class="screenshot-body">
+                            <div class="screenshot-img">
+                                <div class="screenshot-placeholder">
+                                    <div class="placeholder-logo">
+                                        <img src="image/logo.png" alt="Logo">
+                                    </div>
+                                    <i class="fas fa-check-circle"></i>
+                                    <div class="placeholder-text">Trascrizione completata</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screenshot-footer">
+                            <p>Visualizzazione risultati con identificazione parlanti</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DOWNLOAD SECTION - MODIFICATA CON PULSANTE -->
+            <section id="download">
+                <div id="download-button" class="section-title">
+                    <h2><i class="fas fa-download"></i> Scarica Subito Gratuitamente</h2>
+                    <p>Ottieni l'ultima versione del Trascrittore Audio/Video v4.3.0</p>
+                </div>
+
+                <div class="download-grid">
+                    <div class="download-card">
+                        <div class="download-logo">
+                            <img src="image/logo.png" alt="Trascrittore Audio/Video Logo">
+                        </div>
+                        <h3>Trascrittore Audio/Video</h3>
+                        <div class="version-badge">v4.3.0 - Ultima Versione</div>
+                        
+                        <ul class="download-features">
+                            <li><i class="fas fa-check-circle"></i> Installazione automatica</li>
+                            <li><i class="fas fa-check-circle"></i> AssemblyAI integrato</li>
+                            <li><i class="fas fa-check-circle"></i> Supporto multi-lingua</li>
+                            <li><i class="fas fa-check-circle"></i> Dimensione: ~45 MB</li>
+                            <li><i class="fas fa-check-circle"></i> Trial 15 giorni</li>
+                            <li><i class="fas fa-check-circle"></i> Assistenza gratuita</li>
+                            <li><i class="fas fa-check-circle"></i> FFmpeg automatico</li>
+                            <li><i class="fas fa-check-circle"></i> Aggiornamenti automatici</li>
+                        </ul>
+
+                        <!-- PULSANTE MODIFICATO - non mostra link al passaggio del mouse -->
+                        <button class="btn btn-download btn-xl" onclick="startDownload()">
+                            <i class="fas fa-download"></i> SCARICA ORA (GRATIS)
+                        </button>
+
+                        <div class="file-info">
+                            <i class="fas fa-info-circle"></i>
+                            <span>File: Trascrittore_Audio_Video.exe • Dimensione: ~45 MB</span>
+                        </div>
+                    </div>
+
+                    <div class="download-info">
+                        <div class="info-card">
+                            <h4><i class="fas fa-shield-alt"></i> Sicurezza Garantita</h4>
+                            <p>Software 100% sicuro, nessun malware o spyware. API Key crittografate localmente. Tutti i dati elaborati in locale.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h4><i class="fas fa-sync-alt"></i> Aggiornamenti Automatici</h4>
+                            <p>Controllo automatico aggiornamenti all'avvio. Notifiche per nuove versioni. Download e installazione facilitati.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h4><i class="fas fa-headset"></i> Supporto Gratuito</h4>
+                            <p>Supporto tecnico gratuito via email entro 48 ore. Guide dettagliate e risoluzione problemi inclusa.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <h4><i class="fas fa-magic"></i> FFmpeg Automatico</h4>
+                            <p>Download e installazione automatica di FFmpeg. Nessuna configurazione manuale richiesta.</p>
+                        </div>
+
+                        <div class="requirements">
+                            <h3>Requisiti di Sistema</h3>
+                            <div class="requirements-grid">
+                                <div class="requirement-item">
+                                    <i class="fab fa-windows"></i>
+                                    <span>Windows 10/11</span>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fas fa-memory"></i>
+                                    <span>4 GB RAM</span>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fas fa-hdd"></i>
+                                    <span>100 MB spazio</span>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fas fa-wifi"></i>
+                                    <span>Internet (API)</span>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fas fa-microphone"></i>
+                                    <span>AssemblyAI Key</span>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fas fa-tools"></i>
+                                    <span>FFmpeg automatico</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INFO SECTION -->
+            <section id="manual" class="info">
+                <div class="section-title">
+                    <h2><i class="fas fa-info-circle"></i> Informazioni sul Software</h2>
+                    <p>Dettagli tecnici e note sull'autore</p>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h3><i class="fas fa-code"></i> Tecnologie Utilizzate</h3>
+                        <p>Sviluppato con le migliori tecnologie Python per prestazioni ottimali:</p>
+                        <ul class="tech-list">
+                            <li><i class="fab fa-python"></i> Python 3.11+ - Core applicazione</li>
+                            <li><i class="fas fa-brain"></i> AssemblyAI API - Riconoscimento vocale</li>
+                            <li><i class="fas fa-desktop"></i> Tkinter - Interfaccia grafica</li>
+                            <li><i class="fas fa-shield-alt"></i> Cryptography - Sicurezza dati</li>
+                            <li><i class="fas fa-file-word"></i> Python-docx - Esportazione DOCX</li>
+                            <li><i class="fas fa-volume-up"></i> gTTS - Sintesi vocale</li>
+                            <li><i class="fas fa-video"></i> FFmpeg - Elaborazione video</li>
+                            <li><i class="fas fa-database"></i> SQLite3 - Database locale</li>
+                            <li><i class="fas fa-download"></i> Requests - Download automatici</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <h3><i class="fas fa-user"></i> Informazioni sull'Autore</h3>
+                        <div class="author-card">
+                            <div class="author-info" style="width: 100%;">
+                                <h4>Nogarotto Fabrizio</h4>
+                                <p>Sviluppatore Software Specializzato</p>
+                                <div class="author-contact">
+                                    <span onclick="window.location.href='mailto:nogar8system@gmail.com'" style="cursor: pointer;">
+                                        <i class="fas fa-envelope"></i> nogar8system@gmail.com
+                                    </span>
+                                    <span onclick="window.open('https://paypal.me/nogar8system', '_blank')" style="cursor: pointer;">
+                                        <i class="fab fa-paypal"></i> Dona su PayPal
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Software sviluppato con passione per professionisti, ricercatori e studenti che necessitano di trascrizioni accurate.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h3><i class="fas fa-lightbulb"></i> Note Importanti</h3>
+                        <ul class="notes-list">
+                            <li><i class="fas fa-exclamation-triangle"></i> Necessaria chiave API AssemblyAI per trascrizioni</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> FFmpeg scaricato automaticamente al primo uso video</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> Trial di 15 giorni incluso</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> Aggiornamenti automatici integrato</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> Backup automatico configurazioni</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> © 2026 Nogarotto Fabrizio - Tutti i diritti riservati</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <h3><i class="fas fa-history"></i> Cronologia Versioni</h3>
+                        <div class="version-history">
+                            <div class="version-item">
+                                <span class="version-number">v4.3.0</span>
+                                <span class="version-date">2026</span>
+                                <p>Download automatico FFmpeg, verifica aggiornamenti automatica, miglioramenti al sistema di attivazione JWT</p>
+                            </div>
+                            <div class="version-item">
+                                <span class="version-number">v4.1.2</span>
+                                <span class="version-date">2026</span>
+                                <p>Sistema attivazione JWT, gestione licenze, UI migliorata</p>
+                            </div>
+                            <div class="version-item">
+                                <span class="version-number">v4.0.1</span>
+                                <span class="version-date">2025</span>
+                                <p>Text-to-Speech integrato, gestione API Key crittografata</p>
+                            </div>
+                            <div class="version-item">
+                                <span class="version-number">v3.2.0</span>
+                                <span class="version-date">2025</span>
+                                <p>Estrazione sottotitoli, supporto multi-formato video</p>
+                            </div>
+                            <div class="version-item">
+                                <span class="version-number">v3.0.0</span>
+                                <span class="version-date">2024</span>
+                                <p>Riscrittura completa con AssemblyAI, riconoscimento parlanti</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER CORRETTO E MIGLIORATO -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo-container">
+                        <img src="image/logo.png" alt="Trascrittore Audio/Video" class="footer-logo" loading="lazy">
+                        <div class="footer-brand-text">
+                            <h3>Trascrittore<br>Audio/Video</h3>
+                            <span class="footer-version">v4.3.0</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        Software professionale per trascrizione automatica di audio e video.
+                        Semplice, potente ed efficiente.
+                    </p>
+                    <div class="footer-social">
+                        <!-- RIPRISTINATO: Link originali con effetto hover -->
+                        <a href="mailto:nogar8system@gmail.com" aria-label="Contatto email" title="Invia email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://paypal.me/nogar8system" target="_blank" rel="noopener noreferrer" 
+                           aria-label="Donazioni PayPal" title="Supporta il progetto">
+                            <i class="fab fa-paypal"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links-grid">
+                    <div class="footer-section">
+                        <h4>Navigazione</h4>
+                        <ul>
+                            <li><span onclick="scrollToTop()" style="cursor: pointer;">Home</span></li>
+                            <li><span onclick="scrollToSection('features')" style="cursor: pointer;">Funzionalità</span></li>
+                            <li><span onclick="scrollToSection('screenshots')" style="cursor: pointer;">Anteprime</span></li>
+                            <li><span onclick="scrollToSection('download')" style="cursor: pointer;">Download</span></li>
+                            <li><span onclick="scrollToSection('manual')" style="cursor: pointer;">Informazioni</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Supporto</h4>
+                        <ul>
+                            <li><span onclick="window.location.href='mailto:nogar8system@gmail.com'" style="cursor: pointer;">Assistenza</span></li>
+                            <li><span onclick="window.open('https://paypal.me/nogar8system', '_blank')" style="cursor: pointer;">Donazioni</span></li>
+                            <li><span onclick="window.location.href='privacy.html'" style="cursor: pointer;">Privacy Policy</span></li>
+                            <li><span onclick="window.location.href='terms.html'" style="cursor: pointer;">Termini d'uso</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>Tecnologie</h4>
+                        <ul>
+                            <li><span onclick="window.open('https://www.assemblyai.com', '_blank')" style="cursor: pointer;">AssemblyAI API</span></li>
+                            <li><span onclick="window.open('https://ffmpeg.org', '_blank')" style="cursor: pointer;">FFmpeg Toolkit</span></li>
+                            <li><span onclick="window.open('https://www.python.org', '_blank')" style="cursor: pointer;">Python 3</span></li>
+                            <li><span onclick="window.open('https://gtts.readthedocs.io', '_blank')" style="cursor: pointer;">gTTS</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER BOTTOM MIGLIORATO -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-container">
+                    <!-- Logo Software -->
+                    <div class="software-brand">
+                        <div class="software-logo-wrapper">
+                            <img src="image/logo.png" alt="Trascrittore Audio/Video" class="software-logo" loading="lazy">
+                            <div class="software-info">
+                                <span class="software-name">Trascrittore Audio/Video</span>
+                                <span class="software-version">v4.3.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Copyright Centrale -->
+                    <div class="copyright-center">
+                        <p class="copyright-main">
+                            <span aria-hidden="true">&copy;</span> 
+                            <span id="current-year">2026</span> 
+                            Nogar8System - Tutti i diritti riservati
+                        </p>
+                        <div class="copyright-notes">
+                            <p>Software gratuito per uso personale e professionale</p>
+                            <p>Non affiliato con AssemblyAI, FFmpeg o altri marchi menzionati</p>
+                        </div>
+                    </div>
+
+                    <!-- Logo N8S con dimensioni corrette - MODIFICATO: Sostituito link con div -->
+                    <div class="developer-brand" onclick="window.location.href='https://nogar8system.github.io/'">
+                        <div class="developer-logo-wrapper">
+                            <img src="image/N8S.png" alt="Nogar8System - Sistemi Informatici" 
+                                 class="developer-logo" loading="lazy">
+                            <div class="developer-info">
+                                <span class="developer-name">Nogar8System</span>
+                                <span class="developer-tag">Sviluppo Software</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Badge di conformità -->
+                <div class="compliance-badges">
+                    <span aria-label="Software conforme al GDPR">GDPR Compliant</span>
+                    <span aria-label="Certificato sicurezza dati">Dati Crittografati</span>
+                    <span aria-label="Accessibile secondo standard WCAG">WCAG 2.1 AA</span>
+                </div>
+            </div>
+        </footer>
+
+        <!-- POPUP DI DOWNLOAD (inizialmente nascosto) -->
+        <div id="downloadPopup" class="download-popup">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <i class="fas fa-download"></i>
+                    <h3>Download in corso...</h3>
+                </div>
+                <div class="popup-body">
+                    <p><strong>Trascrittore Audio/Video v4.3.0</strong></p>
+                    <p>Il download è stato avviato.</p>
+                    <p class="small">Se non vedi il download, controlla la cartella Downloads del tuo browser.</p>
+                </div>
+                <div class="popup-footer">
+                    <button class="popup-close" onclick="closeDownloadPopup()">Chiudi</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Imposta dinamicamente l'anno corrente nel footer
+            document.addEventListener('DOMContentLoaded', () => {
+                const currentYearElement = document.getElementById('current-year');
+                if (currentYearElement) {
+                    currentYearElement.textContent = new Date().getFullYear();
+                }
+            });
+        </script>
+    </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // ============================================
+        // FUNZIONE DI SCORRIMENTO PER LE SEZIONI
+        // ============================================
+        function scrollToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                const header = document.querySelector('.header');
+                const headerOffset = header ? header.offsetHeight + 20 : 100;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // ============================================
+        // FUNZIONI PER IL SELEttORE LINGUA
+        // ============================================
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            // Chiudi il dropdown
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.remove('active');
+            
+            // Cambia la lingua (reindirizza alla pagina corrispondente)
+            const langUrls = {
+                'en': 'https://nogar8system.github.io/Trascrittore_Audio-Video/en/',
+                'es': 'https://nogar8system.github.io/Trascrittore_Audio-Video/es/',
+                'de': 'https://nogar8system.github.io/Trascrittore_Audio-Video/de/',
+                'fr': 'https://nogar8system.github.io/Trascrittore_Audio-Video/fr/'
+            };
+            
+            if (langUrls[lang]) {
+                window.location.href = langUrls[lang];
+            }
+        }
+
+        // Chiudi il dropdown quando si clicca fuori
+        document.addEventListener('click', function(event) {
+            const langSelector = document.querySelector('.lang-selector');
+            const dropdown = document.getElementById('languageDropdown');
+            
+            if (!langSelector.contains(event.target) && dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // ============================================
+        // FUNZIONE DI DOWNLOAD CORRETTA - UN SOLO DOWNLOAD
+        // ============================================
+        
+        // Variabile per prevenire download multipli
+        let downloadInProgress = false;
+        
+        // Funzione per avviare il download senza mostrare il link
+        function startDownload() {
+            // Previene download multipli
+            if (downloadInProgress) {
+                return;
+            }
+            
+            downloadInProgress = true;
+            
+            // Mostra il popup di download
+            showDownloadPopup();
+            
+            // URL del file da scaricare
+            const downloadUrl = 'https://www.sunredline.org/Pubblica/Trascrizione_AssemblyAI/AssemblyAI_Setup.exe';
+            
+            // SINGOLO METODO: Apri in nuova finestra (funziona per tutti i browser)
+            // Opzioni per rendere la finestra meno visibile
+            const features = 'width=1,height=1,left=9999,top=9999,menubar=no,toolbar=no,location=no,status=no,scrollbars=no,resizable=no';
+            const newWindow = window.open(downloadUrl, '_blank', features);
+            
+            // Chiudi la finestra dopo 3 secondi (il download continuerà)
+            setTimeout(() => {
+                if (newWindow && !newWindow.closed) {
+                    newWindow.close();
+                }
+                // Ripristina il flag dopo che il download è stato avviato
+                setTimeout(() => {
+                    downloadInProgress = false;
+                }, 1000);
+            }, 3000);
+            
+            // Traccia il download nella console
+            console.log('Download avviato: Trascrittore Audio/Video v4.3.0');
+            
+            // Fallback: Se window.open è bloccato, usa un iframe
+            setTimeout(() => {
+                if (!newWindow || newWindow.closed) {
+                    // Crea un iframe invisibile
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = downloadUrl;
+                    document.body.appendChild(iframe);
+                    
+                    // Rimuovi l'iframe dopo 5 secondi
+                    setTimeout(() => {
+                        if (iframe.parentElement) {
+                            iframe.parentElement.removeChild(iframe);
+                        }
+                        downloadInProgress = false;
+                    }, 5000);
+                }
+            }, 100);
+        }
+        
+        // Funzione per mostrare il popup di download
+        function showDownloadPopup() {
+            const popup = document.getElementById('downloadPopup');
+            if (popup) {
+                popup.style.display = 'block';
+                
+                // Chiudi automaticamente dopo 6 secondi
+                setTimeout(() => {
+                    closeDownloadPopup();
+                }, 6000);
+            }
+        }
+        
+        // Funzione per chiudere il popup di download
+        function closeDownloadPopup() {
+            const popup = document.getElementById('downloadPopup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        }
+        
+        // Chiudi il popup se si clicca fuori da esso
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('downloadPopup');
+            if (popup && popup.style.display === 'block') {
+                const popupContent = popup.querySelector('.popup-content');
+                if (!popupContent.contains(event.target) && !event.target.classList.contains('btn-download')) {
+                    closeDownloadPopup();
+                }
+            }
+        });
+
+        // ============================================
+        // FUNZIONI ESISTENTI
+        // ============================================
+
+        // Funzione per lo scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mostra/nascondi pulsante scroll to top
+        window.addEventListener('scroll', function() {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                scrollButton.style.opacity = '1';
+                scrollButton.style.transform = 'translateY(0)';
+            } else {
+                scrollButton.style.opacity = '0';
+                scrollButton.style.transform = 'translateY(20px)';
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('transcriber-theme');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+            body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('transcriber-theme', isDarkMode ? 'dark' : 'light');
+        });
+
+        // Effetto hover per le feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
